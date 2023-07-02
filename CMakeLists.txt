@@ -14,11 +14,14 @@ add_executable(Class_design
    class_design.cpp
    )
    
-
+add_executable(Singleton
+   singleton.cpp
+   )
 
 set_target_properties(
    Pimpl
    Class_design
+   Singleton
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
