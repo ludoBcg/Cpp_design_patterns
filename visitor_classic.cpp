@@ -43,11 +43,12 @@ class ShapeVisitor
 |                                                      SHAPE                                                  |
 +-------------------------------------------------------------------------------------------------------------*/
 
+// Shape interface
 class Shape
 {
  public:
     Shape()
-        :center_()
+        :m_center()
     {}
 
    virtual ~Shape() = default;
@@ -55,10 +56,10 @@ class Shape
    // accept visitor
    virtual void accept( ShapeVisitor const& v ) = 0;
 
-   Point  center() const { return center_; }
+   Point  center() const { return m_center; }
 
 protected:
-    Point center_;
+    Point m_center;
 };
 
 using Shapes = std::vector< std::unique_ptr<Shape> >;
@@ -72,16 +73,16 @@ class Circle : public Shape
 {
  public:
    explicit Circle( double radius )
-      : radius_( radius )
+      : m_radius( radius )
    {}
 
    // calls visitor visit() function for Circle
    void accept( ShapeVisitor const& v ) override { v.visit(*this); }
 
-   double radius() const { return radius_; }
+   double radius() const { return m_radius; }
 
  private:
-   double radius_;
+   double m_radius;
 };
 
 
@@ -93,16 +94,16 @@ class Square : public Shape
 {
  public:
    explicit Square( double side )
-      : side_( side )
+      : m_side( side )
    {}
 
    // calls visitor visit() function for Circle
    void accept( ShapeVisitor const& v ) override { v.visit(*this); }
 
-   double side() const { return side_; }
+   double side() const { return m_side; }
 
  private:
-   double side_;
+   double m_side;
 };
 
 

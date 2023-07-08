@@ -31,18 +31,18 @@ class ShapeData
 {
 public:
     ShapeData()
-        :center_()
+        :m_center()
     {}
 
     virtual ~ShapeData() = default;
 
     // no need for accept() function anymore
-    // this class could be removed if there were no data to store (here center_ as an example)
+    // this class could be removed if there were no data to store (here m_center as an example)
 
-    Point  center() const { return center_; }
+    Point  center() const { return m_center; }
 
 protected:
-    Point center_;
+    Point m_center;
 };
 
 
@@ -54,13 +54,13 @@ class Circle : public ShapeData
 {
  public:
    explicit Circle( double radius )
-      : radius_( radius )
+      : m_radius( radius )
    {}
 
-   double radius() const { return radius_; }
+   double radius() const { return m_radius; }
 
  private:
-   double radius_;
+   double m_radius;
 };
 
 
@@ -72,13 +72,13 @@ class Square : public ShapeData
 {
  public:
    explicit Square( double side )
-      : side_( side )
+      : m_side( side )
    {}
 
-   double side() const { return side_; }
+   double side() const { return m_side; }
 
  private:
-   double side_;
+   double m_side;
 };
 
 
