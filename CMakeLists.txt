@@ -17,11 +17,21 @@ add_executable(Class_design
 add_executable(Singleton
    singleton.cpp
    )
+   
+add_executable(Visitor_classic
+   visitor_classic.cpp
+   )
+   
+add_executable(Visitor_modern
+   visitor_modern.cpp
+   )
 
 set_target_properties(
    Pimpl
    Class_design
    Singleton
+   Visitor_classic
+   Visitor_modern
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
