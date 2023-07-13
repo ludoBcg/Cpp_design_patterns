@@ -26,12 +26,17 @@ add_executable(Visitor_modern
    visitor_modern.cpp
    )
 
+add_executable(Factory
+   factory.cpp
+   )
+
 set_target_properties(
    Pimpl
    Class_design
    Singleton
    Visitor_classic
    Visitor_modern
+Factory
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
