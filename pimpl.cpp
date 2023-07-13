@@ -22,7 +22,7 @@ class Circle
 
     private:
         class impl; // not defined here
-        std::unique_ptr<impl> pImpl;
+        std::unique_ptr<impl> m_pImpl;
 
     public:
         // Public API:
@@ -44,21 +44,21 @@ class Circle::impl
 {
     public:
         // Actual implementation of functions
-        void draw(const Circle& c)      { std::cout << "draw a circle of radius " << m_radius << std::endl; }
-        void translate(const Circle& c) { std::cout << "translate a circle of radius " << m_radius << std::endl; }
+        void draw(const Circle& _c)      { std::cout << "draw a circle of radius " << m_radius << std::endl; }
+        void translate(const Circle& _c) { std::cout << "translate a circle of radius " << m_radius << std::endl; }
  
         impl() : m_radius(0) {}
-        impl(int n) : m_radius(n) {}
+        impl(int _n) : m_radius(_n) {}
 
     private:
         int m_radius; // private data
 };
  
-void Circle::draw()      { pImpl->draw(*this); }
-void Circle::translate() { pImpl->translate(*this); }
+void Circle::draw()      { m_pImpl->draw(*this); }
+void Circle::translate() { m_pImpl->translate(*this); }
 
-Circle::Circle() : pImpl(std::make_unique<impl>()) {}
-Circle::Circle(int n) : pImpl(std::make_unique<impl>(n)) {}
+Circle::Circle() : m_pImpl(std::make_unique<impl>()) {}
+Circle::Circle(int _n) : m_pImpl(std::make_unique<impl>(_n)) {}
 Circle::~Circle() = default;
 
 
