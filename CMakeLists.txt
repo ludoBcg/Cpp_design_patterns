@@ -26,8 +26,8 @@ add_executable(Visitor_modern
    visitor_modern.cpp
    )
 
-add_executable(Factory
-   factory.cpp
+add_executable(Factory_method
+   factory_method.cpp
    )
 
 set_target_properties(
@@ -36,7 +36,7 @@ set_target_properties(
    Singleton
    Visitor_classic
    Visitor_modern
-Factory
+   Factory_method
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
