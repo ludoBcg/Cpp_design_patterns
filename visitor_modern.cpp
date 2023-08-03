@@ -53,8 +53,8 @@ protected:
 class Circle : public ShapeData
 {
  public:
-   explicit Circle( double radius )
-      : m_radius( radius )
+   explicit Circle( double _radius )
+      : m_radius( _radius )
    {}
 
    double radius() const { return m_radius; }
@@ -71,8 +71,8 @@ class Circle : public ShapeData
 class Square : public ShapeData
 {
  public:
-   explicit Square( double side )
-      : m_side( side )
+   explicit Square( double _side )
+      : m_side( _side )
    {}
 
    double side() const { return m_side; }
@@ -94,19 +94,19 @@ class AreaVisitor
    ~AreaVisitor() = default;
 
    // compute and print area of a scaled Circle
-   void operator()(Circle const& circle) const
+   void operator()(Circle const& _circle) const
    {
-       std::cout << "circle: radius=" << circle.radius()
+       std::cout << "circle: radius=" << _circle.radius()
            << ", scale = " << m_scale
-           << ", area = " << std::numbers::pi * pow(circle.radius() * m_scale , 2) << std::endl;
+           << ", area = " << std::numbers::pi * pow(_circle.radius() * m_scale , 2) << std::endl;
    }
 
    // compute and print area of a scaled Square
-   void operator()(Square const& square) const
+   void operator()(Square const& _square) const
    {
-       std::cout << "square: side=" << square.side()
+       std::cout << "square: side=" << _square.side()
            << ", scale = " << m_scale
-           << ", area = " << square.side() * m_scale * square.side() * m_scale << std::endl;
+           << ", area = " << _square.side() * m_scale * _square.side() * m_scale << std::endl;
    }
 
 private:
@@ -122,9 +122,9 @@ private:
 using Shape = std::variant<Circle, Square>;
 using Shapes = std::vector< Shape >;
 
-void areaAllShapes( Shapes const& shapes )
+void areaAllShapes( Shapes const& _shapes )
 {
-    for (auto const& shape : shapes)
+    for (auto const& shape : _shapes)
     {
         // std::visit calls a callable (AreaVisitor) onto a variant (shape)
         // https://en.cppreference.com/w/cpp/utility/variant/visit

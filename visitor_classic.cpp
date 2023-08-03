@@ -54,7 +54,7 @@ class Shape
    virtual ~Shape() = default;
 
    // accept visitor
-   virtual void accept( ShapeVisitor const& v ) = 0;
+   virtual void accept( ShapeVisitor const& _v ) = 0;
 
    Point  center() const { return m_center; }
 
@@ -72,12 +72,12 @@ using Shapes = std::vector< std::unique_ptr<Shape> >;
 class Circle : public Shape
 {
  public:
-   explicit Circle( double radius )
-      : m_radius( radius )
+   explicit Circle( double _radius )
+      : m_radius( _radius )
    {}
 
    // calls visitor visit() function for Circle
-   void accept( ShapeVisitor const& v ) override { v.visit(*this); }
+   void accept( ShapeVisitor const& _v ) override { _v.visit(*this); }
 
    double radius() const { return m_radius; }
 
@@ -93,12 +93,12 @@ class Circle : public Shape
 class Square : public Shape
 {
  public:
-   explicit Square( double side )
-      : m_side( side )
+   explicit Square( double _side )
+      : m_side( _side )
    {}
 
    // calls visitor visit() function for Circle
-   void accept( ShapeVisitor const& v ) override { v.visit(*this); }
+   void accept( ShapeVisitor const& _v ) override { _v.visit(*this); }
 
    double side() const { return m_side; }
 
@@ -117,19 +117,19 @@ public:
     explicit AreaVisitor(double _scale = 1.0) : m_scale(_scale) {}
 
     // compute and print area of a scaled Circle
-    void visit(Circle const& circle) const override
+    void visit(Circle const& _circle) const override
     {
-        std::cout << "circle: radius=" << circle.radius()
+        std::cout << "circle: radius=" << _circle.radius()
             << ", scale = " << m_scale
-            << ", area = " << M_PI * pow(circle.radius() * m_scale , 2) << std::endl;
+            << ", area = " << M_PI * pow(_circle.radius() * m_scale , 2) << std::endl;
     }
 
     // compute and print area of a scaled Square
-    void visit(Square const& square) const override
+    void visit(Square const& _square) const override
     {
-        std::cout << "square: side=" << square.side()
+        std::cout << "square: side=" << _square.side()
             << ", scale = " << m_scale
-            << ", area = " << square.side() * m_scale * square.side() * m_scale << std::endl;
+            << ", area = " << _square.side() * m_scale * _square.side() * m_scale << std::endl;
     }
 
 private:
@@ -142,9 +142,9 @@ private:
 |                                                      MAIN                                                   |
 +-------------------------------------------------------------------------------------------------------------*/
 
-void areaAllShapes( Shapes const& shapes )
+void areaAllShapes( Shapes const& _shapes )
 {
-   for( auto const& shape : shapes )
+   for( auto const& shape : _shapes )
    {
       shape->accept(AreaVisitor(1.0));
    }
