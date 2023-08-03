@@ -1,20 +1,18 @@
 /*********************************************************************************************************************
  *
- * factory_method.cpp
+ * factory_simple.cpp
  *
  * Cpp_design_patterns
  * Ludovic Blache
  *
  *********************************************************************************************************************/
 
- // See https://refactoring.guru/design-patterns/factory-method/cpp/example
+ // See https://en.wikibooks.org/wiki/C%2B%2B_Programming/Code/Design_Patterns#Factory
+ //     https://refactoring.guru/design-patterns/factory-comparison
 
 #include <iostream>
 # define _USE_MATH_DEFINES
 #include <math.h>
-#include <variant>
-#include <vector>
-#include <numbers>
 
 
 struct Point
@@ -23,6 +21,12 @@ struct Point
     double y;
 };
 
+
+enum class TypeShape
+{
+    square,
+    circle
+};
 
 
 /*------------------------------------------------------------------------------------------------------------+
@@ -89,58 +93,31 @@ private:
 
 
 /*------------------------------------------------------------------------------------------------------------+
-|                                                   SHAPECREATOR                                              |
+|                                                   SHAPEFACTORY                                              |
 +-------------------------------------------------------------------------------------------------------------*/
 
-// Creator interface
-class ShapeCreator 
+class ShapeFactory
 {
 
 public:
-    virtual ~ShapeCreator() {};
+    virtual ~ShapeFactory() {};
 
-    // Factory method
-    // To be implemented by derived classes (may then return different types of Shapes)
-    virtual std::shared_ptr<Shape> FactoryMethod() const = 0;
-    
-    double shapeArea() const 
+    static std::shared_ptr<Shape> createShape(const TypeShape _typeShape)
     {
-        // Call the factory method to create a Shape object.
-        std::shared_ptr<Shape> shape(this->FactoryMethod());
-        // Now, use the Shape.
-        return shape->area();
+
+        switch (_typeShape) 
+        {
+            case TypeShape::circle:
+                // Creates a Circle of radius 1
+                return std::make_shared<Circle>(1.0);
+            case TypeShape::square:
+                // Creates a Square of side 1
+                return std::make_shared<Square>(1.0);
+            default:
+                return nullptr;
+        }
     }
-};
 
-
-/*------------------------------------------------------------------------------------------------------------+
-|                                                  CIRCLECREATOR                                              |
-+-------------------------------------------------------------------------------------------------------------*/
-
-class CircleCreator : public ShapeCreator 
-{
-
-public:
-    std::shared_ptr<Shape> FactoryMethod() const override
-    {
-        // Creates a Circle of radius 1
-        return std::make_shared<Circle>(1.0);
-    }
-};
-
-
-/*------------------------------------------------------------------------------------------------------------+
-|                                                  SQUARECREATOR                                              |
-+-------------------------------------------------------------------------------------------------------------*/
-
-class SquareCreator : public ShapeCreator 
-{
-public:
-    std::shared_ptr<Shape> FactoryMethod() const override
-    {
-        // Creates a Square of side 1
-        return std::make_shared<Square>(1.0);
-    }
 };
 
 
@@ -150,11 +127,11 @@ public:
 
 int main()
 {
-    CircleCreator creator1;
-    std::cout << "Circle area = " << creator1.shapeArea() << std::endl;
+    ShapeFactory factory;
 
-    SquareCreator creator2;
-    std::cout << "Square area = " << creator2.shapeArea() << std::endl;
+    std::cout << "Circle area = " << factory.createShape(TypeShape::circle)->area() << std::endl;
+
+    std::cout << "Square area = " << factory.createShape(TypeShape::square)->area() << std::endl;
 
     return EXIT_SUCCESS;
 }

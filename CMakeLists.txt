@@ -30,6 +30,10 @@ add_executable(Factory_method
    factory_method.cpp
    )
 
+add_executable(Factory_simple
+   factory_simple.cpp
+   )
+
 set_target_properties(
    Pimpl
    Class_design
@@ -37,6 +41,7 @@ set_target_properties(
    Visitor_classic
    Visitor_modern
    Factory_method
+   Factory_simple
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
