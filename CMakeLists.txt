@@ -34,6 +34,10 @@ add_executable(Factory_simple
    factory_simple.cpp
    )
 
+add_executable(Bridge
+   bridge.cpp
+   )
+
 set_target_properties(
    Pimpl
    Class_design
@@ -42,6 +46,7 @@ set_target_properties(
    Visitor_modern
    Factory_method
    Factory_simple
+   Bridge
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
