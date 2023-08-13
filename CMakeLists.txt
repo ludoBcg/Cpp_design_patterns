@@ -38,6 +38,14 @@ add_executable(Bridge
    bridge.cpp
    )
 
+add_executable(Builder
+   builder.cpp
+   )
+
+add_executable(Decorator
+   decorator.cpp
+   )
+
 set_target_properties(
    Pimpl
    Class_design
@@ -47,6 +55,8 @@ set_target_properties(
    Factory_method
    Factory_simple
    Bridge
+   Builder
+   Decorator
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
