@@ -7,7 +7,7 @@
  *
  *********************************************************************************************************************/
 
- // 
+ // https://en.wikibooks.org/wiki/C%2B%2B_Programming/Code/Design_Patterns#Decorator
 
 #include <iostream>
 # define _USE_MATH_DEFINES
@@ -39,7 +39,7 @@ public:
         , m_title("abstract widget")
     {}
 
-    virtual ~Widget() = default; //@
+    virtual ~Widget() = default;
 
     virtual void print() const
     {
@@ -91,7 +91,7 @@ public:
 
     void render()
     {
-        std::cout << "    draw widget" << std::endl;;
+        std::cout << "  draw widget" << std::endl;;
     }
 
 };
@@ -116,7 +116,7 @@ public:
         m_widget = _widget;
     }
 
-    virtual ~WidgetDecorator() = default;//@
+    virtual ~WidgetDecorator() = default;
 
     virtual void print() const = 0;
 
@@ -153,9 +153,9 @@ public:
 
     void render()
     {
-        std::cout << "    activate color" << std::endl;
+        std::cout << "  activate color" << std::endl;
         m_widget->render();
-        std::cout << "    deactivate color" << std::endl;
+        std::cout << "  deactivate color" << std::endl;
     }
 
 };
@@ -188,9 +188,9 @@ public:
 
     void render()
     {
-        std::cout << "    activate alpha blending" << std::endl;
+        std::cout << "  activate alpha blending" << std::endl;
         m_widget->render();
-        std::cout << "    deactivate alpha blending" << std::endl;
+        std::cout << "  deactivate alpha blending" << std::endl;
     }
 
 };
@@ -223,9 +223,9 @@ public:
 
     void render()
     {
-        std::cout << "    activate shadow" << std::endl;
+        std::cout << "  activate shadow" << std::endl;
         m_widget->render();
-        std::cout << "    deactivate shadow" << std::endl;
+        std::cout << "  deactivate shadow" << std::endl;
     }
 
 };
@@ -242,17 +242,17 @@ int main()
     // Create a default Widget
     std::shared_ptr<Widget> widget1 = std::make_shared<WidgetModel1>();
     widget1->print();
-    std::cout << "  rendering pipeline: " << std::endl;
+    std::cout << "Rendering pipeline: " << std::endl;
     widget1->render();
     // add color feature
     widget1 = std::make_shared <ColorDecorator>(widget1);
     widget1->print();
-    std::cout << "  rendering pipeline: " << std::endl;
+    std::cout << "Rendering pipeline: " << std::endl;
     widget1->render();
     // add alpha blending feature
     widget1 = std::make_shared<AlphaDecorator>(widget1);
     widget1->print();
-    std::cout << "  rendering pipeline: " << std::endl;
+    std::cout << "Rendering pipeline: " << std::endl;
     widget1->render();
 
     // Create another Widget
@@ -262,7 +262,7 @@ int main()
     // add alpha blending feature
     widget2 = std::make_shared<ShadowDecorator>(widget2);
     widget2->print();
-    std::cout << "  rendering pipeline: " << std::endl;
+    std::cout << "Rendering pipeline: " << std::endl;
     widget2->render();
 
 
