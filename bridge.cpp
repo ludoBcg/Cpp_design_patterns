@@ -75,7 +75,7 @@ public:
 protected:
 
     // ptr to implementation
-    std::shared_ptr<Implementation> m_implementation = nullptr;
+    std::shared_ptr<Implementation> m_pImpl = nullptr;
 };
 
 
@@ -89,12 +89,12 @@ public:
     explicit Circle(double _radius, std::shared_ptr<Implementation> _impl)
         : m_radius(_radius)
     {
-        m_implementation = _impl;
+        m_pImpl = _impl;
     }
 
     void printArea() const override {
-        if(m_implementation)
-            m_implementation->printArea( M_PI * pow(m_radius, 2) );
+        if(m_pImpl)
+            m_pImpl->printArea( M_PI * pow(m_radius, 2) );
     }
 
 private:

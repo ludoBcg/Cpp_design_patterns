@@ -24,7 +24,7 @@ struct Point
 
 /*------------------------------------------------------------------------------------------------------------+
 |                                                      SHAPE                                                  |
-+-------------------------------------------------------------------------------------------------------------*/
++------------------------------------------------------------------------------------------------------------*/
 
 // only for data storage, avoid virtual functions as much as possible
 class ShapeData
@@ -48,7 +48,7 @@ protected:
 
 /*------------------------------------------------------------------------------------------------------------+
 |                                                      CIRCLE                                                 |
-+-------------------------------------------------------------------------------------------------------------*/
++------------------------------------------------------------------------------------------------------------*/
 
 class Circle : public ShapeData
 {
@@ -66,7 +66,7 @@ class Circle : public ShapeData
 
 /*------------------------------------------------------------------------------------------------------------+
 |                                                      SQUARE                                                 |
-+-------------------------------------------------------------------------------------------------------------*/
++------------------------------------------------------------------------------------------------------------*/
 
 class Square : public ShapeData
 {
@@ -83,8 +83,60 @@ class Square : public ShapeData
 
 
 /*------------------------------------------------------------------------------------------------------------+
+|                                                     TRIANGLE                                                |
++------------------------------------------------------------------------------------------------------------*/
+
+class Triangle : public ShapeData
+{
+public:
+    explicit Triangle(double _base, double _height)
+        : m_base(_base), m_height(_height)
+    {}
+
+    double base() const { return m_base; }
+    double height() const { return m_height; }
+
+private:
+    double m_base;
+    double m_height;
+};
+
+
+/*------------------------------------------------------------------------------------------------------------+
+|                                                   PRINTVISITOR                                              |
++------------------------------------------------------------------------------------------------------------*/
+
+class PrintVisitor
+{
+public:
+    explicit PrintVisitor(){}
+
+    ~PrintVisitor() = default;
+
+    // print Circle data
+    void operator()(Circle const& _circle) const
+    {
+        std::cout << "circle: radius=" << _circle.radius() << std::endl;
+    }
+
+    // pprint Square data
+    void operator()(Square const& _square) const
+    {
+        std::cout << "square: side=" << _square.side() << std::endl;
+    }
+
+    // pprint Triangle data
+    void operator()(Triangle const& _triangle) const
+    {
+        std::cout << "triangle: base=" << _triangle.base()
+                  << ", height=" << _triangle.height() << std::endl;
+    }
+};
+
+
+/*------------------------------------------------------------------------------------------------------------+
 |                                                   AREAVISITOR                                               |
-+-------------------------------------------------------------------------------------------------------------*/
++------------------------------------------------------------------------------------------------------------*/
 
 class AreaVisitor
 {
@@ -93,20 +145,24 @@ class AreaVisitor
 
    ~AreaVisitor() = default;
 
-   // compute and print area of a scaled Circle
-   void operator()(Circle const& _circle) const
+   // operator() can return a value
+
+   // compute and return area of a scaled Circle
+   double operator()(Circle const& _circle) const
    {
-       std::cout << "circle: radius=" << _circle.radius()
-           << ", scale = " << m_scale
-           << ", area = " << std::numbers::pi * pow(_circle.radius() * m_scale , 2) << std::endl;
+       return std::numbers::pi * pow(_circle.radius() * m_scale , 2);
    }
 
-   // compute and print area of a scaled Square
-   void operator()(Square const& _square) const
+   // compute and return area of a scaled Square
+   double operator()(Square const& _square) const
    {
-       std::cout << "square: side=" << _square.side()
-           << ", scale = " << m_scale
-           << ", area = " << _square.side() * m_scale * _square.side() * m_scale << std::endl;
+       return _square.side() * m_scale * _square.side() * m_scale;
+   }
+
+   // compute and return area of a scaled Triangle
+   double operator()(Triangle const& _triangle) const
+   {
+       return _triangle.base() * m_scale * _triangle.height() * m_scale * 0.5;
    }
 
 private:
@@ -116,19 +172,22 @@ private:
 
 /*------------------------------------------------------------------------------------------------------------+
 |                                                      MAIN                                                   |
-+-------------------------------------------------------------------------------------------------------------*/
++------------------------------------------------------------------------------------------------------------*/
 
-// a Shape is either a Circle or a Square
-using Shape = std::variant<Circle, Square>;
+// a Shape is either a Circle, a Square, or a Triangle
+using Shape = std::variant<Circle, Square, Triangle>;
 using Shapes = std::vector< Shape >;
 
-void areaAllShapes( Shapes const& _shapes )
+void visitAllShapes( Shapes const& _shapes )
 {
     for (auto const& shape : _shapes)
     {
-        // std::visit calls a callable (AreaVisitor) onto a variant (shape)
+        // std::visit calls a callable (visitor) onto a variant (shape)
         // https://en.cppreference.com/w/cpp/utility/variant/visit
-        std::visit(AreaVisitor(1.0), shape);
+
+        std::visit(PrintVisitor(), shape);
+
+        std::cout << "area = " <<  std::visit(AreaVisitor(2.0), shape) << std::endl;
     }
 }
 
@@ -140,8 +199,9 @@ int main()
    shapes.emplace_back( Circle( 2.3 ) );
    shapes.emplace_back( Square( 1.2 ) );
    shapes.emplace_back( Circle( 4.1 ) );
+   shapes.emplace_back( Triangle( 2.1, 1.2 ) );
 
-   areaAllShapes( shapes );
+   visitAllShapes( shapes );
 
    return EXIT_SUCCESS;
 }

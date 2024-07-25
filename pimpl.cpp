@@ -22,7 +22,7 @@ class Circle
 
     private:
         class impl; // not defined here
-        std::unique_ptr<impl> m_pImpl;
+        std::unique_ptr<impl> m_pImpl; // ptr to implementation, similar to a Bridge
 
     public:
         // Public API:
@@ -53,7 +53,8 @@ class Circle::impl
     private:
         int m_radius; // private data
 };
- 
+
+// Class methods are just calling implementation methods
 void Circle::draw()      { m_pImpl->draw(*this); }
 void Circle::translate() { m_pImpl->translate(*this); }
 
