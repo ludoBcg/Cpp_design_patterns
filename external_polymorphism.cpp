@@ -32,11 +32,6 @@ public:
     explicit Circle(Point _center, double _radius)
         : m_center(_center), m_radius(_radius)
     {}
-
-    void print() const {
-        std::cout << "Circle: center = (" << m_center.x << ", " << m_center.y
-            << "), radius = " << m_radius << std::endl;
-    }
     
     Point  center() const { return m_center; }
     double radius() const { return m_radius; }
