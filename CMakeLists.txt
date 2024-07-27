@@ -45,7 +45,23 @@ add_executable(Builder
 add_executable(Decorator
    decorator.cpp
    )
+   
+add_executable(Prototype
+   prototype.cpp
+   )
 
+add_executable(External_polymorphism
+   external_polymorphism.cpp
+   )
+   
+add_executable(Type_erasure
+   type_erasure.cpp
+   )
+   
+add_executable(Proxy
+   proxy.cpp
+   )
+   
 set_target_properties(
    Pimpl
    Class_design
@@ -57,6 +73,10 @@ set_target_properties(
    Bridge
    Builder
    Decorator
+   Prototype
+   External_polymorphism
+   Type_erasure
+   Proxy
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
