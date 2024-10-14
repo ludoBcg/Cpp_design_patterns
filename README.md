@@ -13,3 +13,5 @@ https://github.com/igl42/cpp_software_design
 https://refactoring.guru/design-patterns/cpp
 
 https://en.wikibooks.org/wiki/C%2B%2B_Programming/Code/Design_Patterns
+
+https://github.com/igl42/cpp_software_design
