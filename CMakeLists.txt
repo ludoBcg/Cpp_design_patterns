@@ -62,6 +62,10 @@ add_executable(Proxy
    proxy.cpp
    )
    
+add_executable(Observer
+   observer.cpp
+   )
+   
 set_target_properties(
    Pimpl
    Class_design
@@ -77,6 +81,7 @@ set_target_properties(
    External_polymorphism
    Type_erasure
    Proxy
+   Observer
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
