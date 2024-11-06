@@ -120,12 +120,24 @@ class MySubject : public Subject
         // Add an Observer to the list
         void Attach(Observer* _observer) override 
         {
+            if (_observer == nullptr)
+            {
+                std::cerr << "invalid pointer" << std::endl;
+                return;
+            }
+                
             m_listObservers.push_back(_observer);
         }
 
         // Remove an Observer from the list
         void Detach(Observer* _observer) override 
         {
+            if (_observer == nullptr)
+            {
+                std::cerr << "invalid pointer" << std::endl;
+                return;
+            }
+                
             m_listObservers.remove(_observer);
         }
 
@@ -165,6 +177,8 @@ int main()
     // instanciate 2 Subjects (publishers)
     MySubject publisher1;
     MySubject publisher2;
+
+    publisher1.Attach(nullptr);
 
     // instanciate 2 Observers (subscribers)
     MyObserver subscriber1(publisher1, "Subscriber 1");
