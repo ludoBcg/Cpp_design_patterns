@@ -65,6 +65,10 @@ add_executable(Proxy
 add_executable(Observer
    observer.cpp
    )
+
+add_executable(Flyweight
+   flyweight.cpp
+   )
    
 set_target_properties(
    Pimpl
@@ -82,6 +86,7 @@ set_target_properties(
    Type_erasure
    Proxy
    Observer
+   Flyweight
    PROPERTIES
    EXCLUDE_FROM_ALL ON
    EXCLUDE_FROM_DEFAULT_BUILD ON
