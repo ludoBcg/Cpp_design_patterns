@@ -70,9 +70,14 @@ add_executable(Flyweight
    flyweight.cpp
    )
    
+add_executable(Templates
+   templates.cpp
+   )
+   
 set_target_properties(
    Pimpl
    Class_design
+   Templates
    Singleton
    Visitor_classic
    Visitor_modern
