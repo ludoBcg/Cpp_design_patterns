@@ -73,27 +73,33 @@ add_executable(Flyweight
 add_executable(Templates
    templates.cpp
    )
+
+add_executable(Functional
+   functional.cpp
+   )
+   
    
 set_target_properties(
-   Pimpl
-   Class_design
-   Templates
-   Singleton
-   Visitor_classic
-   Visitor_modern
-   Factory_method
-   Factory_simple
-   Bridge
-   Builder
-   Decorator
-   Prototype
-   External_polymorphism
-   Type_erasure
-   Proxy
-   Observer
-   Flyweight
-   PROPERTIES
-   EXCLUDE_FROM_ALL ON
-   EXCLUDE_FROM_DEFAULT_BUILD ON
-   )
+	Class_design
+	Pimpl
+	Templates
+	Functional
+	Singleton
+	Visitor_classic
+	Visitor_modern
+	Factory_method
+	Factory_simple
+	Bridge
+	Builder
+	Decorator
+	Prototype
+	External_polymorphism
+	Type_erasure
+	Proxy
+	Observer
+	Flyweight
+	PROPERTIES
+	EXCLUDE_FROM_ALL ON
+	EXCLUDE_FROM_DEFAULT_BUILD ON
+	)
 
