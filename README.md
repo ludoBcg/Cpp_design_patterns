@@ -2,7 +2,7 @@
 Example code for various C++ design patterns
 
 Provided Cmake scripts generates a VisualStudio solution with one project for each example.
-Implemented with VS2022 and C++20
+Implemented with VS2026 and C++20
 
 Sources:
 
